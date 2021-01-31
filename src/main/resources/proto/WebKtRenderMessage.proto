@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_package = "me.sttimort.webkt.protobuf";
+
+message WebKtRenderMessage {
+    enum Action {
+        OVERWRITE = 0;
+        OVERWRITE_CHILDREN = 1;
+        APPEND_CHILDREN = 2;
+    }
+    string targetElementId = 1;
+    Action action = 2;
+    repeated WebKtHtmlElement element = 3;
+}
+
+message WebKtHtmlElement {
+    enum Type {
+        TEXT = 0;
+        DIV = 1;
+    }
+    Type type = 1;
+    map<string, string> attributes = 2;
+    string text = 3;
+    repeated WebKtHtmlElement child = 4;
+}

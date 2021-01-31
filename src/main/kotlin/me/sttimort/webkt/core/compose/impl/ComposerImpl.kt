@@ -10,12 +10,12 @@ import java.util.*
 class ComposerImpl(
     private val recompose: () -> Unit = {}
 ) : Composer {
-    private val groups = Array(size = 0) { EMPTY_GROUP }
-    private var parentGroupIndex = -1
-    private var currentGroupIndex = -1
-    private val parentGroupIndexesStack = Stack<Int>()
+//    private val groups = Array(size = 0) { EMPTY_GROUP }
+//    private var parentGroupIndex = -1
+//    private var currentGroupIndex = -1
+//    private val parentGroupIndexesStack = Stack<Int>()
 
-    private val slotsArray = Array<Any?>(size = 0) { null }
+//    private val slotsArray = Array<Any?>(size = 0) { null }
 
     private val cache = mutableListOf<Any?>()
 
@@ -34,30 +34,30 @@ class ComposerImpl(
     }
 
     fun inRootGroup(block: ComposerImpl.() -> Unit) {
-        startRootGroup()
+//        startRootGroup()
         block(this)
-        endRootGroup()
+//        endRootGroup()
     }
 
-    private fun startRootGroup() {
-        val rootGroup = Group(ROOT_GROUP_KEY)
-        groups[++currentGroupIndex] = rootGroup
-    }
+//    private fun startRootGroup() {
+//        val rootGroup = Group(ROOT_GROUP_KEY)
+//        groups[++currentGroupIndex] = rootGroup
+//    }
 
-    private fun endRootGroup() {
+//    private fun endRootGroup() {
+//
+//    }
 
-    }
-
-    fun startGroup(key: Int) {
-        val newGroup = Group(key)
-        groups[++currentGroupIndex] = newGroup
-        parentGroupIndexesStack.push(parentGroupIndex)
-        parentGroupIndex = currentGroupIndex
-    }
-
-    fun endGroup() {
-        parentGroupIndex = parentGroupIndexesStack.pop()
-    }
+//    fun startGroup(key: Int) {
+//        val newGroup = Group(key)
+//        groups[++currentGroupIndex] = newGroup
+//        parentGroupIndexesStack.push(parentGroupIndex)
+//        parentGroupIndex = currentGroupIndex
+//    }
+//
+//    fun endGroup() {
+//        parentGroupIndex = parentGroupIndexesStack.pop()
+//    }
 
 
     override fun <T> Composer.memo(vararg inputs: Any?, factory: () -> T): T {
@@ -73,10 +73,10 @@ class ComposerImpl(
         current.addChild(element.build())
     }
 
-    fun emitElement(element: WebKtHtmlElementOrBuilder, content: () -> Unit) {
-        checkElementExpected()
-
-    }
+//    fun emitElement(element: WebKtHtmlElementOrBuilder, content: () -> Unit) {
+//        checkElementExpected()
+//
+//    }
 
     override fun onRecompose() {
         recompose()
@@ -98,15 +98,15 @@ class ComposerImpl(
         }
     }
 
-   private fun checkElementExpected() {
-
-   }
+//   private fun checkElementExpected() {
+//
+//   }
 }
 
-data class Group(
-    val key: Int
-)
+//data class Group(
+//    val key: Int
+//)
+//
+//val EMPTY_GROUP = Group(Int.MIN_VALUE)
 
-val EMPTY_GROUP = Group(Int.MIN_VALUE)
-
-const val ROOT_GROUP_KEY = 0
+//const val ROOT_GROUP_KEY = 0

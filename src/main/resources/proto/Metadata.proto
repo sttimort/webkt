@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_package = "me.sttimort.webkt.protobuf";
+
+message Metadata {
+    enum Type {
+        SESSION_RESTORATION = 0;
+        LINK = 1;
+        RENDER = 2;
+    }
+    Type type = 1;
+}

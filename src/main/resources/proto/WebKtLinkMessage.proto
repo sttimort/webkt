@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "me.sttimort.webkt.protobuf";
+
+message WebKtLinkMessage {
+  string linkType = 1;
+  string linkRelation = 2;
+  string linkHref = 3;
+}

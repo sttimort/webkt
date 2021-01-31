@@ -123,9 +123,13 @@ public final class MetadataOuterClass {
        */
       SESSION_RESTORATION(0),
       /**
-       * <code>RENDER = 1;</code>
+       * <code>LINK = 1;</code>
        */
-      RENDER(1),
+      LINK(1),
+      /**
+       * <code>RENDER = 2;</code>
+       */
+      RENDER(2),
       UNRECOGNIZED(-1),
       ;
 
@@ -134,9 +138,13 @@ public final class MetadataOuterClass {
        */
       public static final int SESSION_RESTORATION_VALUE = 0;
       /**
-       * <code>RENDER = 1;</code>
+       * <code>LINK = 1;</code>
        */
-      public static final int RENDER_VALUE = 1;
+      public static final int LINK_VALUE = 1;
+      /**
+       * <code>RENDER = 2;</code>
+       */
+      public static final int RENDER_VALUE = 2;
 
 
       public final int getNumber() {
@@ -164,7 +172,8 @@ public final class MetadataOuterClass {
       public static Type forNumber(int value) {
         switch (value) {
           case 0: return SESSION_RESTORATION;
-          case 1: return RENDER;
+          case 1: return LINK;
+          case 2: return RENDER;
           default: return null;
         }
       }
@@ -661,10 +670,10 @@ public final class MetadataOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\016Metadata.proto\"U\n\010Metadata\022\034\n\004type\030\001 \001" +
-      "(\0162\016.Metadata.Type\"+\n\004Type\022\027\n\023SESSION_RE" +
-      "STORATION\020\000\022\n\n\006RENDER\020\001B\034\n\032me.sttimort.w" +
-      "ebkt.protobufb\006proto3"
+      "\n\016Metadata.proto\"_\n\010Metadata\022\034\n\004type\030\001 \001" +
+      "(\0162\016.Metadata.Type\"5\n\004Type\022\027\n\023SESSION_RE" +
+      "STORATION\020\000\022\010\n\004LINK\020\001\022\n\n\006RENDER\020\002B\034\n\032me." +
+      "sttimort.webkt.protobufb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -8,6 +8,8 @@ import io.rsocket.util.ByteBufPayload
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import me.sttimort.webkt.protobuf.MetadataOuterClass.Metadata
+import me.sttimort.webkt.protobuf.WebKtLinkMessageOuterClass
+import me.sttimort.webkt.protobuf.WebKtLinkMessageOuterClass.WebKtLinkMessage
 import me.sttimort.webkt.protobuf.WebKtRenderMessageOuterClass.WebKtHtmlElement
 import me.sttimort.webkt.protobuf.WebKtRenderMessageOuterClass.WebKtRenderMessage
 import me.sttimort.webkt.util.logger
@@ -60,6 +62,19 @@ private class Something(
             .subscribe()
 
         val clockPage = ClockPage()
+
+        clockPage.styles.forEach { url ->
+            val metadata = Metadata.newBuilder().setType(Metadata.Type.LINK).build()
+            val data = WebKtLinkMessage.newBuilder().apply {
+                linkType = "text/css"
+                linkRelation = "stylesheet"
+                linkHref = url
+            }
+                .build()
+
+            fluxSink.next(ByteBufPayload.create(data.toByteArray(), metadata.toByteArray()))
+        }
+
         val render: () -> Unit = {
             runBlocking {
                 renderToRoot(fluxSink, clockPage.compose())

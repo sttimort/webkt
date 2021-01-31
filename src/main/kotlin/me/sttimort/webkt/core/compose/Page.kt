@@ -9,7 +9,8 @@ import me.sttimort.webkt.protobuf.WebKtRenderMessageOuterClass.WebKtHtmlElement
 import java.util.concurrent.atomic.AtomicReference
 
 class Page(
-    private val buildPageContent: ComposerImpl.() -> Unit = {}
+    val styles: List<String> = listOf(),
+    private val buildPageContent: ComposerImpl.() -> Unit = {},
 ) {
     private lateinit var composer: ComposerImpl
 
@@ -25,7 +26,6 @@ class Page(
 }
 
 fun ComposerImpl.Text(content: String) {
-
     emit(
         WebKtHtmlElement.newBuilder()
             .setType(WebKtHtmlElement.Type.TEXT)
@@ -33,12 +33,23 @@ fun ComposerImpl.Text(content: String) {
     )
 }
 
+fun ComposerImpl.Container(contentBuilder: ComposerImpl.() -> Unit) {
+    emit(
+        WebKtHtmlElement.newBuilder()
+            .setType(WebKtHtmlElement.Type.DIV)
+            .putAttributes("class", "text-muted")
+    ) {
+        contentBuilder.invoke(this)
+    }
+}
+
 class Component
+
 fun ComposerImpl.Component(content: Composer.() -> Unit = {}) {
-    startGroup(Component::class.hashCode())
+//    startGroup(Component::class.hashCode())
 
     content()
-    endGroup()
+//    endGroup()
 }
 
 fun <T : Any> Composer.observe(
