@@ -33,11 +33,11 @@ fun ComposerImpl.Text(content: String) {
     )
 }
 
-fun ComposerImpl.Container(contentBuilder: ComposerImpl.() -> Unit) {
+fun ComposerImpl.Container(classes:List<String> = listOf(),contentBuilder: ComposerImpl.() -> Unit) {
     emit(
         WebKtHtmlElement.newBuilder()
             .setType(WebKtHtmlElement.Type.DIV)
-            .putAttributes("class", "text-muted")
+            .putAttributes("class", classes.joinToString(separator = " "))
     ) {
         contentBuilder.invoke(this)
     }
